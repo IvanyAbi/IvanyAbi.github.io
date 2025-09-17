@@ -69,7 +69,7 @@
                 <a href="#" class="btn-location" data-map-link="LINK_GOOGLE_MAPS_CIVIL">¿Cómo llegar?</a>
             </div>
             <div class="location-card">
-                <h3>Ceremonia y Fiesta</h3>
+                <h3>Conferencia y Fiesta</h3>
                 <p>Echando Raices Eventos a las 19:00h</p>
                 <img src="Fotos/Foto conferencia.jpg" alt="Ubicación Ceremonia y Fiesta" class="location-image">
                 <a href="#" class="btn-location" data-map-link="https://maps.app.goo.gl/MF61mNpdWmdYW6vj7?g_st=iw">¿Cómo llegar?</a>
@@ -77,29 +77,21 @@
         </div>
     </section>
 
-    <section id="formulario" class="rsvp-section animate-on-scroll">
+   <section id="formulario" class="rsvp-section animate-on-scroll">
     <h2>Confirmar asistencia</h2>
     <p>Nos complace enormemente invitarte a formar parte de nuestra boda</p>
-    <form id="rsvp-form" class="rsvp-form" action="https://formspree.io/f/mjkeqpqb" method="POST">
+    <div class="rsvp-form">
         <div class="form-group centered">
             <p>Invitación:</p>
-            <label><input type="radio" name="attendance" value="si" required> Sí, confirmo!</label>
-            <label><input type="radio" name="attendance" value="no"> No puedo :(</label>
+            <label>
+                <input type="radio" name="attendance" value="si" required> Sí, confirmo!
+            </label>
+            <label>
+                <input type="radio" name="attendance" value="no"> No puedo :(
+            </label>
         </div>
-        <div class="form-group">
-            <label for="name">Nombre*</label>
-            <input type="text" id="name" name="name" placeholder="Escribir aquí..." required>
-        </div>
-        <div class="form-group">
-            <label for="email">Correo electrónico*</label>
-            <input type="email" id="email" name="email" placeholder="Escribir aquí..." required>
-        </div>
-        <div class="form-group">
-            <label for="guests">Acompañantes</label>
-            <input type="text" id="guests" name="guests" placeholder="Escribir aquí..." >
-        </div>
-        <button type="submit" class="btn-submit">CONFIRMAR</button>
-    </form>
+        <button id="confirm-button" class="btn-submit">CONFIRMAR</button>
+    </div>
 </section>
 
      <section id="nuestra-historia" class="gallery-section animate-on-scroll">
@@ -139,7 +131,7 @@
                 </div>
             </div>
             <div class="timeline-item">
-                <p>20:00h Ceremonia</p>
+                <p>20:00h Conferencia</p>
                 <div class="path-divider">
                     <div class="path-lines">
                         <div class="line"></div>
@@ -189,7 +181,7 @@
 
     <section id="plataformas-social" class="social-section animate-on-scroll">
         <h2>Plataformas y social</h2>
-        <p>Comparte tus fotos o videos de este fantástico día con todos</p>
+        <p>Compartí tus fotos o videos de este fantástico día con todos</p>
         <a href="https://drive.google.com/drive/u/2/folders/1TID8AoVmVGRKA5HJ1kC2cRnn1ojzHdfU" target="_blank" class="hashtag">#bodaivanyabigail</a>
     </section>
     
@@ -218,7 +210,7 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('giftsModal')">&times;</span>
             <h3>Detalles para los Regalos</h3>
-            <p class="gift-text">Lo más importante es tu presencia, pero si quieres hacernos un regalo, estos son nuestros datos bancarios. ¡Gracias de corazón!</p>
+            <p class="gift-text">Lo más importante es tu presencia, pero si queres hacernos un regalo, estos son nuestros datos bancarios. ¡Gracias de corazón!</p>
             <div class="bank-details">
                 <p><strong>CBU:</strong> <span id="cbu-text">0070093130004035284557</span> <button onclick="copyToClipboard('cbu-text')">Copiar</button></p>
                 <p><strong>Alias:</strong> <span id="alias-text">ivan.brossino</span> <button onclick="copyToClipboard('alias-text')">Copiar</button></p>
@@ -230,11 +222,20 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('notesModal')">&times;</span>
             <h3 class="modal-notes-title">Notas y tips adicionales</h3>
-            <p>Informamos que la finca del evento dispone de un parking privado, el cual vamos a usar de estacionamiento una vez termine la conferencia. Contactar con nosotros si se tiene cualquier otra duda.</p>
-            <p>Contamos con ustedes, así que confirma pronto la asistencia.</p>
+            <p>La finca del evento cuenta con estacionamiento privado, que podrán utilizar al finalizar la ceremonia. Ante cualquier duda, no duden en contactarnos.</p>
+            <p>Les pedimos confirmar su asistencia lo antes posible.</p>
             <p>¡A ver si llegas a tiempo, que nos conocemos! ;)</p>
         </div>
     </div>
+
+    <div id="noAttendanceModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('noAttendanceModal')">&times;</span>
+        <h3 class="modal-notes-title">¡Qué pena!</h3>
+        <p>Lamentamos mucho que no puedas acompañarnos. ¡Gracias por avisarnos!</p>
+    </div>
+</div>
+    
     
     <script>
         // Contador de tiempo
@@ -314,6 +315,37 @@
                 console.error('Error al copiar: ', err);
             });
         }
+
+  
+
     </script>
+    <script>
+      // ... (tu código JavaScript existente, como el contador) ...
+
+// JavaScript para el nuevo formulario de confirmación con modal
+document.getElementById('confirm-button').addEventListener('click', function() {
+    const radioButtons = document.getElementsByName('attendance');
+    let selectedValue;
+
+    for (const radio of radioButtons) {
+        if (radio.checked) {
+            selectedValue = radio.value;
+            break;
+        }
+    }
+
+    if (selectedValue === 'si') {
+        const whatsappUrl = "https://wa.me/5491169590506?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda.";
+        window.location.href = whatsappUrl;
+    } else if (selectedValue === 'no') {
+        // En lugar de una alerta, ahora abrimos el nuevo modal
+        openModal('noAttendanceModal');
+    } else {
+        alert("Por favor, selecciona una opción.");
+    }
+});
+    </script>
+</body>
+</html>
 </body>
 </html>
