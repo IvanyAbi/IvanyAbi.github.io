@@ -95,7 +95,7 @@ section.visible {
 
 .btn-confirm-attendance {
     background-color: var(--crema-grisaceo);
-    color: var(--marron-suave); /* Color de texto para el botón de confirmación */
+    color: var(--marron-suave);
     padding: 0.8em 1.5em;
     border-radius: 5px;
     font-weight: 500;
@@ -181,7 +181,6 @@ section.visible {
     .hero-date { font-size: 1em; }
 }
 
-
 /* --- Contador --- */
 .countdown-section {
     background-color: var(--crema-grisaceo);
@@ -238,20 +237,20 @@ section.visible {
 }
 
 .location-card {
-    background-color: var(--white); /* Fondo blanco para las tarjetas de ubicación */
+    background-color: var(--white);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     padding: 2em;
     width: 100%;
     max-width: 400px;
-    display: flex; /* Para organizar el contenido verticalmente */
+    display: flex;
     flex-direction: column;
-    align-items: center; /* Centrar elementos dentro de la tarjeta */
+    align-items: center;
 }
 
 .location-card h3 {
     color: var(--marron-suave);
-    margin-top: 0; /* Eliminar margen superior del título */
+    margin-top: 0;
     margin-bottom: 1em;
 }
 
@@ -261,11 +260,11 @@ section.visible {
 }
 
 .location-image {
-    width: 100%; /* La imagen ocupará todo el ancho de la tarjeta */
-    height: 250px; /* Altura fija para que todas las imágenes sean iguales */
-    object-fit: cover; /* Recortar la imagen para que se ajuste sin distorsionarse */
-    border-radius: 8px; /* Bordes redondeados para la imagen */
-    margin-bottom: 1.5em; /* Espacio debajo de la imagen */
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1.5em;
 }
 
 .btn-location {
@@ -276,7 +275,7 @@ section.visible {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s;
-    margin-top: auto; /* Empuja el botón hacia abajo si el contenido es variable */
+    margin-top: auto;
 }
 
 /* --- Formulario --- */
@@ -371,97 +370,131 @@ section.visible {
     100% { transform: translateX(calc(-100% - 2em)); }
 }
 
-/* Ocultar los botones de navegación */
-.slider-controls {
-    display: none;
-}
-
-/* --- Cronograma --- */
-.about-section {
-    background-color: var(--beige-oscuro);
+/* --- Cronograma (nuevo estilo) --- */
+.timeline-section {
+    position: relative;
+    background-color: var(--beige-claro);
     padding-bottom: 2em;
 }
 
-.about-section h2, .about-section h3 {
+.timeline-section h2 {
     color: var(--marron-suave);
 }
 
-.timeline {
+.timeline-container {
     position: relative;
-    max-width: 400px;
-    margin: 2em auto 0;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 2em 0;
 }
 
-/* Estilo para los diamantes grandes (al principio y al final) */
-.timeline .diamond {
-    width: 20px; /* Tamaño del diamante */
-    height: 20px;
-    background-color: var(--marron-suave);
-    margin: 1em auto; /* Centrar y darle espacio */
-    transform: rotate(45deg); /* Girar para formar el rombo */
-}
-
-.timeline-item {
-    position: relative;
-    padding: 0.5em 0;
-    line-height: 1.5;
-    color: var(--marron-suave);
-    width: 100%;
-}
-
-/* Estilo del texto del cronograma */
-.timeline-item p {
-    margin: 0;
+.timeline-container ul {
+    list-style: none;
     padding: 0;
-    font-size: 1.5em;
-    font-family: 'Prata', serif;
-    font-weight: 500;
-    line-height: 1;
+    margin: 0;
+    position: relative;
+}
+
+/* La línea vertical */
+.timeline-container ul::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background-color: var(--marron-suave);
+    z-index: 0;
+}
+
+.timeline-container ul li {
+    position: relative;
+    padding: 2em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Lado izquierdo de la línea */
+.timeline-container ul li:nth-child(odd) {
+    justify-content: flex-start;
+}
+.timeline-container ul li:nth-child(odd) .timeline-event-content {
+    text-align: right;
+    width: 45%;
+    padding-right: 20px;
+}
+
+/* Lado derecho de la línea */
+.timeline-container ul li:nth-child(even) {
+    justify-content: flex-end;
+}
+.timeline-container ul li:nth-child(even) .timeline-event-content {
+    text-align: left;
+    width: 45%;
+    padding-left: 20px;
+}
+
+/* Círculo en la línea */
+.timeline-container ul li::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--marron-suave);
+    z-index: 1;
+}
+
+/* Línea horizontal que conecta al círculo */
+.timeline-container ul li::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5%;
+    height: 2px;
+    background-color: var(--marron-suave);
+    z-index: 1;
+}
+
+.timeline-container ul li:nth-child(odd)::before {
+    right: 50%;
+}
+
+.timeline-container ul li:nth-child(even)::before {
+    left: 50%;
+}
+
+/* Estilos para los textos */
+.timeline-time {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--marron-suave);
+    margin-bottom: 0.25em;
+}
+
+.timeline-description {
+    font-size: 1em;
     color: var(--marron-suave);
 }
 
-/* Contenedor del camino (líneas cortas) */
-.path-divider {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0.5em auto; /* Espacio entre el texto del evento y el camino */
+
+/* --- Info Cards --- */
+.info-section {
+    background-color: var(--beige-claro);
+    color: var(--marron-suave);
+    padding: 4em 1em;
 }
-
-.path-lines {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.path-lines .line {
-    width: 2px;
-    height: 10px; /* Altura de cada línea corta */
-    background-color: var(--marron-suave);
-    margin-bottom: 5px; /* Espacio entre cada línea corta */
-}
-
-/* Ajuste para la última línea del camino para que no haya margen extra */
-.path-lines .line:last-child {
-    margin-bottom: 0;
-}
-
-
-/* Eliminar cualquier pseudo-elemento que pueda quedar si no los hemos borrado del todo */
-.timeline-item::before,
-.timeline-item::after {
-    display: none;
-}
-
 
 .info-cards {
     display: flex;
     justify-content: center;
-    gap: 2em; /* Añade espacio entre las tarjetas */
+    gap: 2em;
     flex-wrap: wrap;
     margin-top: 3em;
 }
@@ -473,6 +506,11 @@ section.visible {
     width: 100%;
     max-width: 300px;
     color: var(--marron-suave);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .info-card h3 {
@@ -480,24 +518,16 @@ section.visible {
     color: var(--marron-suave);
 }
 
-/* Estilos específicos para el título del modal de notas */
 .info-card .notes-title {
-    font-family: 'Prata', serif; /* Asegura la fuente Prata */
-    font-size: 1.8em; /* Tamaño más grande para el título "Notas y tips" */
+    font-family: 'Prata', serif;
+    font-size: 1.8em;
     margin-bottom: 0.5em;
 }
-
-.info-icon {
-    font-size: 2.5em; /* Tamaño del icono */
-    color: var(--verde-suave); /* Color del icono */
-    margin-bottom: 0.5em;
-    display: block; /* Asegura que ocupe su propia línea */
-}
-
 
 .btn-info {
-    display: inline-block;
-    padding: 0.8em 1.5em;
+    width: 100%;
+    max-width: 200px;
+    padding: 15px 0;
     background-color: var(--verde-suave);
     color: var(--white);
     text-decoration: none;
@@ -505,6 +535,19 @@ section.visible {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 1em;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* Alinea los textos para que se vean como en la maqueta */
+.info-card p {
+    flex-grow: 1; /* Permite que el párrafo ocupe el espacio disponible */
+}
+
+/* Opcional: Estilo adicional para los botones */
+.btn-info:hover {
+    background-color: #8fa57b;
 }
 
 /* --- Plataformas y Social --- */
@@ -589,12 +632,12 @@ section.visible {
 }
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* Centra el modal y le da un margen superior */
+    margin: 15% auto;
     padding: 2em;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     position: relative;
-    max-width: 400px; /* Ancho máximo más pequeño para el modal */
+    max-width: 400px;
     text-align: center;
     color: var(--marron-suave);
 }
@@ -643,27 +686,35 @@ section.visible {
 
 /* Estilos específicos para el modal de notas adicionales */
 #notesModal .modal-content {
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
-    border-radius: 15px; /* Bordes redondeados más pronunciados */
-    padding: 2.5em; /* Un poco más de padding */
-    max-width: 450px; /* Ancho ligeramente mayor */
-    margin: 10% auto; /* Ajuste el margen superior para que se vea un poco más arriba */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Sombra más suave y definida */
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 2.5em;
+    max-width: 450px;
+    margin: 10% auto;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .modal-notes-title {
     font-family: 'Prata', serif;
-    font-size: 2.2em; /* Más grande para el título del modal */
-    color: var(--marron-suave); /* Color marron */
+    font-size: 2.2em;
+    color: var(--marron-suave);
     margin-bottom: 1em;
     text-align: center;
 }
 
 #notesModal .modal-content p {
-    font-family: 'Prata', serif; /* Fuente Prata para todo el texto */
-    font-size: 1.1em; /* Un poco más grande para el cuerpo del texto */
-    line-height: 1.8; /* Mayor interlineado para legibilidad */
-    margin-bottom: 1.5em; /* Más espacio entre párrafos */
-    text-align: center; /* Centrar el texto */
-    color: var(--marron-suave); /* Color marron para el texto */
+    font-family: 'Prata', serif;
+    font-size: 1.1em;
+    line-height: 1.8;
+    margin-bottom: 1.5em;
+    text-align: center;
+    color: var(--marron-suave);
+}
+
+/* Contenedor de los botones de WhatsApp */
+.whatsapp-buttons {
+    display: flex;
+    justify-content: center; /* Para centrar los botones */
+    gap: 20px; /* Aquí ajustas el espacio entre los botones. Puedes cambiar '20px' por el valor que prefieras. */
+    margin-top: 2em; /* Puedes mantener el margen superior que tenías en el estilo en línea */
 }
